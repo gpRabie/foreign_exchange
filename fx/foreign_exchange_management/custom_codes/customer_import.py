@@ -1,14 +1,14 @@
 import frappe
 @frappe.whitelist()
 def get_customer(tracking_number, first_name, last_name, risk_level, gender, place_of_birth, date_of_birth, id_type, id_expiry, id_docs_pic_name, phone_number, nationality, house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, house_no_present=None, street_or_brgy_present=None, city_present=None, state_present=None, country_present=None, corporate_account_name = None, nature_of_bussiness = None):
-    if corporate_account_name == "" and nature_of_bussiness == "":
+    if corporate_account_name == "" and nature_of_bussiness == "": # if transaction is personal
         create_customer_individual(tracking_number, first_name, last_name, risk_level, gender)
         customer = frappe.get_last_doc('Customer')
         create_contact_individual(first_name, last_name, gender, place_of_birth, date_of_birth, customer.name, id_type, id_expiry, id_docs_pic_name, phone_number, nationality)
         create_address_primary(house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, customer.name)
-        if street_or_brgy_present is not None:
+        if street_or_brgy_present != "":
             create_address_present(street_or_brgy_present, city_present, state_present, country_present, customer.name, house_no_present)
-    else:
+    else: # if transaction is corporate
         create_customer_company(tracking_number, corporate_account_name, risk_level, nature_of_bussiness)
         customer = frappe.get_last_doc('Customer')
         create_contact_company(first_name, last_name, gender, place_of_birth, date_of_birth, customer.name, id_type, id_expiry, id_docs_pic_name, phone_number, corporate_account_name, nationality)
