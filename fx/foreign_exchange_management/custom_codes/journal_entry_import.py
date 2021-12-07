@@ -56,7 +56,8 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
     if flt(additional_funds) > 0:
         doc1 = frappe.new_doc('Journal Entry')
         doc1.voucher_type = 'Journal Entry'
-        doc1.company = 'Garcia\'s Pawnshop'
+        # doc1.company = 'Garcia\'s Pawnshop'
+        doc1.company = 'TEST Garcia\'s Pawnshop'
         doc1.posting_date = posting_date
 
         row_values1 = doc1.append('accounts', {})
@@ -74,7 +75,8 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
     if flt(shortage_overage) > 0:
         doc2 = frappe.new_doc('Journal Entry')
         doc2.voucher_type = 'Journal Entry'
-        doc2.company = 'Garcia\'s Pawnshop'
+        # doc2.company = 'Garcia\'s Pawnshop'
+        doc2.company = 'TEST Garcia\'s Pawnshop'
         doc2.posting_date = posting_date
 
         row_values1 = doc2.append('accounts', {})
@@ -92,7 +94,8 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
     elif flt(shortage_overage) < 0:
         doc3 = frappe.new_doc('Journal Entry')
         doc3.voucher_type = 'Journal Entry'
-        doc3.company = 'Garcia\'s Pawnshop'
+        # doc3.company = 'Garcia\'s Pawnshop'
+        doc3.company = 'TEST Garcia\'s Pawnshop'
         doc3.posting_date = posting_date
 
         row_values1 = doc3.append('accounts', {})
@@ -110,7 +113,8 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
     if flt(peso_out) > 0:
         doc4 = frappe.new_doc('Journal Entry')
         doc4.voucher_type = 'Journal Entry'
-        doc4.company = 'Garcia\'s Pawnshop'
+        # doc4.company = 'Garcia\'s Pawnshop'
+        doc4.company = 'TEST Garcia\'s Pawnshop'
         doc4.posting_date = posting_date
         
         row_values1 = doc4.append('accounts', {})
