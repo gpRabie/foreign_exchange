@@ -71,6 +71,7 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
         row_values2.debit_in_account_currency = flt(0)
 
         doc1.save()
+        doc1.submit()
 
     if flt(shortage_overage) > 0:
         doc2 = frappe.new_doc('Journal Entry')
@@ -90,6 +91,7 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
         row_values2.debit_in_account_currency = flt(shortage_overage)
 
         doc2.save()
+        doc2.submit()
 
     elif flt(shortage_overage) < 0:
         doc3 = frappe.new_doc('Journal Entry')
@@ -109,6 +111,7 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
         row_values2.debit_in_account_currency = flt(0)
 
         doc3.save()
+        doc3.submit()
 
     if flt(peso_out) > 0:
         doc4 = frappe.new_doc('Journal Entry')
@@ -128,4 +131,5 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
         row_values2.debit_in_account_currency = flt(peso_out)
         
         doc4.save()
+        doc4.submit()
 	#doc.submit()
