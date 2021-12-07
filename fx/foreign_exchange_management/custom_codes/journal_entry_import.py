@@ -17,26 +17,26 @@ def get_data(url):
 def create_new_journal_entry():
 	data = get_data('https://docs.google.com/spreadsheets/d/1Id-1_SYEb8ZY_-rYQqown_9msjKD15RUrCszbVJzjc8/edit#gid=952708933')
 	accounts = {
-		'CC-COH': '10001-001-000-000 - Cash on Hand - FX-GPCAVITE - GP', 
-		'CC-CIV': '10203-001-000-000 - Cash in Vault - FX Reserve PHP-GPCAVITE - GP',
-        'CC-Short': '79303-001-000-000 - Cash Shortage/Overage - FX-GPCAVITE - GP',
-        'GTC-COH': '10001-002-000-000 - Cash on Hand - FX-GPGTC - GP',
-		'GTC-CIV': '10203-002-000-000 - Cash in Vault - FX Reserve PHP-GPGTC - GP',
-        'GTC-Short': '79303-002-000-000 - Cash Shortage/Overage - FX-GPGTC - GP',
-        'MOL-COH': '10001-003-000-000 - Cash on Hand - FX-GPMOL - GP',
-		'MOL-CIV': '10203-003-000-000 - Cash in Vault - FX Reserve PHP-GPMOL - GP',
-        'MOL-Short': '79303-003-000-000 - Cash Shortage/Overage - FX-GPMOL - GP',
-		'POB-COH': '10001-007-000-000 - Cash on Hand - FX-MPPOB - GP',
-		'POB-CIV': '10203-007-000-000 - Cash in Vault - FX Reserve PHP-MPPOB - GP',
-        'POB-Short': '79303-007-000-000 - Cash Shortage/Overage - FX-MPPOB - GP',
-		'TNZ-COH': '10001-008-000-000 - Cash on Hand - FX-MPTANZA - GP',
-		'TNZ-CIV': '10203-008-000-000 - Cash in Vault - FX Reserve PHP-MPTANZA - GP',
-        'TNZ-Short': '79303-008-000-000 - Cash Shortage/Overage - FX-MPTANZA - GP',
-        'MAIN': '10401-006-000-000 - Currencies Bought - FX-MPMAIN - GP'
+		'CC-COH': '10001-001-000-000 - Cash on Hand - FX-GPCAVITE - TGP', 
+		'CC-CIV': '10203-001-000-000 - Cash in Vault - FX Reserve PHP-GPCAVITE - TGP',
+        'CC-Short': '79303-001-000-000 - Cash Shortage/Overage - FX-GPCAVITE - TGP',
+        'GTC-COH': '10001-002-000-000 - Cash on Hand - FX-GPGTC - TGP',
+		'GTC-CIV': '10203-002-000-000 - Cash in Vault - FX Reserve PHP-GPGTC - TGP',
+        'GTC-Short': '79303-002-000-000 - Cash Shortage/Overage - FX-GPGTC - TGP',
+        'MOL-COH': '10001-003-000-000 - Cash on Hand - FX-GPMOL - TGP',
+		'MOL-CIV': '10203-003-000-000 - Cash in Vault - FX Reserve PHP-GPMOL - TGP',
+        'MOL-Short': '79303-003-000-000 - Cash Shortage/Overage - FX-GPMOL - TGP',
+		'POB-COH': '10001-007-000-000 - Cash on Hand - FX-MPPOB - TGP',
+		'POB-CIV': '10203-007-000-000 - Cash in Vault - FX Reserve PHP-MPPOB - TGP',
+        'POB-Short': '79303-007-000-000 - Cash Shortage/Overage - FX-MPPOB - TGP',
+		'TNZ-COH': '10001-008-000-000 - Cash on Hand - FX-MPTANZA - TGP',
+		'TNZ-CIV': '10203-008-000-000 - Cash in Vault - FX Reserve PHP-MPTANZA - TGP',
+        'TNZ-Short': '79303-008-000-000 - Cash Shortage/Overage - FX-MPTANZA - TGP',
+        'MAIN': '10401-006-000-000 - Currencies Bought - FX-MPMAIN - TGP'
 	}
 	yesterday = add_to_date(datetime.now(), days=-1, as_string=True)
 	for entry_no in range (2, len(data)):
-		if data[entry_no][2] >= "2021-12-01":
+		if data[entry_no][2] >= Date.parse("2021-12-01"):
 			if data[entry_no][3] == "CC":
 				create_JE(data[entry_no][2], accounts.get("CC-COH"), accounts.get("CC-CIV"), accounts.get("CC-Short"), accounts.get("MAIN"), data[entry_no][5], data[entry_no][6], data[entry_no][8])
 			elif data[entry_no][3] == "POB":
