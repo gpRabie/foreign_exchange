@@ -128,6 +128,14 @@ doc_events = {
 # 	]
 # }
 
+scheduler_events = {
+	"cron": {
+		"0 23 * * *": [
+			"fx.foreign_exchange_management.custom_codes.journal_entry_import.create_new_journal_entry"
+		]
+	}
+}
+
 # Testing
 # -------
 
