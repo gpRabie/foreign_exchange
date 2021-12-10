@@ -36,7 +36,7 @@ def create_new_journal_entry():
 	}
 	yesterday = add_to_date(datetime.now(), days=-1, as_string=True)
 	for entry_no in range (2, len(data)):
-		if data[entry_no][2] == today():
+		if data[entry_no][2] >= "2021-12-01":
 			if data[entry_no][3] == "CC":
 				create_JE(data[entry_no][2], accounts.get("CC-COH"), accounts.get("CC-CIV"), accounts.get("CC-Short"), accounts.get("MAIN"), data[entry_no][5], data[entry_no][6], data[entry_no][8])
 			elif data[entry_no][3] == "POB":
