@@ -36,17 +36,17 @@ def create_new_journal_entry():
 	}
 	yesterday = add_to_date(datetime.now(), days=-1, as_string=True)
 	for entry_no in range (2, len(data)):
-		if data[entry_no][2] >= "2021-12-01":
-			if data[entry_no][3] == "CC":
-				create_JE(data[entry_no][2], accounts.get("CC-COH"), accounts.get("CC-CIV"), accounts.get("CC-Short"), accounts.get("MAIN"), data[entry_no][5], data[entry_no][6], data[entry_no][8])
-			elif data[entry_no][3] == "POB":
-				create_JE(data[entry_no][2], accounts.get("POB-COH"), accounts.get("POB-CIV"), accounts.get("POB-Short"), accounts.get("MAIN"), data[entry_no][5], data[entry_no][6], data[entry_no][8])
-			elif data[entry_no][3] == "GTC":
-				create_JE(data[entry_no][2], accounts.get("GTC-COH"), accounts.get("GTC-CIV"), accounts.get("GTC-Short"), accounts.get("MAIN"), data[entry_no][5], data[entry_no][6], data[entry_no][8])
-			elif data[entry_no][3] == "TNZ":
-				create_JE(data[entry_no][2], accounts.get("TNZ-COH"), accounts.get("TNZ-CIV"), accounts.get("TNZ-Short"), accounts.get("MAIN"), data[entry_no][5], data[entry_no][6], data[entry_no][8])
-			elif data[entry_no][3] == "MOL":
-				create_JE(data[entry_no][2], accounts.get("MOL-COH"), accounts.get("MOL-CIV"), accounts.get("MOL-Short"), accounts.get("MAIN"), data[entry_no][5], data[entry_no][6], data[entry_no][8])
+		if data[entry_no][3] == today():
+			if data[entry_no][4] == "CC":
+				create_JE(data[entry_no][3], accounts.get("CC-COH"), accounts.get("CC-CIV"), accounts.get("CC-Short"), accounts.get("MAIN"), data[entry_no][6], data[entry_no][7], data[entry_no][9])
+			elif data[entry_no][4] == "POB":
+				create_JE(data[entry_no][3], accounts.get("POB-COH"), accounts.get("POB-CIV"), accounts.get("POB-Short"), accounts.get("MAIN"), data[entry_no][6], data[entry_no][7], data[entry_no][9])
+			elif data[entry_no][4] == "GTC":
+				create_JE(data[entry_no][3], accounts.get("GTC-COH"), accounts.get("GTC-CIV"), accounts.get("GTC-Short"), accounts.get("MAIN"), data[entry_no][6], data[entry_no][7], data[entry_no][9])
+			elif data[entry_no][4] == "TNZ":
+				create_JE(data[entry_no][3], accounts.get("TNZ-COH"), accounts.get("TNZ-CIV"), accounts.get("TNZ-Short"), accounts.get("MAIN"), data[entry_no][6], data[entry_no][7], data[entry_no][9])
+			elif data[entry_no][4] == "MOL":
+				create_JE(data[entry_no][3], accounts.get("MOL-COH"), accounts.get("MOL-CIV"), accounts.get("MOL-Short"), accounts.get("MAIN"), data[entry_no][6], data[entry_no][7], data[entry_no][9])
 	
 	return True
 				
