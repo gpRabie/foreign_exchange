@@ -28,8 +28,8 @@ def create_customer_individual(tracking_number, first_name, last_name, risk_leve
         customer.gender = customer_gender.gender
 
     customer.risk_level = risk_level
-    customer.insert()
-    customer.save()
+    customer.insert(ignore_permissions=True)
+    customer.save(ignore_permissions=True)
 
 def create_customer_company(tracking_number, corporate_account_name, risk_level, nature_of_bussiness):
     customer = frappe.new_doc('Customer')
@@ -41,14 +41,14 @@ def create_customer_company(tracking_number, corporate_account_name, risk_level,
     elif frappe.db.exists('Industry Type', nature_of_bussiness) is None:
         customer_bussiness = frappe.new_doc('Industry Type')
         customer_bussiness.industry = nature_of_bussiness
-        customer_bussiness.insert()
-        customer_bussiness.save()
+        customer_bussiness.insert(ignore_permissions=True)
+        customer_bussiness.save(ignore_permissions=True)
         bussiness = frappe.get_last_doc('Industry Type')
         customer.industry = bussiness.industry
 
     customer.risk_level = risk_level
-    customer.insert()
-    customer.save()
+    customer.insert(ignore_permissions=True)
+    customer.save(ignore_permissions=True)
 
 
 
@@ -62,8 +62,8 @@ def create_contact_individual(first_name, last_name, gender, place_of_birth, dat
     elif frappe.db.exists('Nationality', nationality) is None:
         new_nationality = frappe.new_doc('Nationality')
         new_nationality.nationality = nationality
-        new_nationality.insert()
-        new_nationality.save()
+        new_nationality.insert(ignore_permissions=True)
+        new_nationality.save(ignore_permissions=True)
         customer = frappe.get_last_doc('Nationality')
         contact.nationality = customer.nationality
 
@@ -83,8 +83,8 @@ def create_contact_individual(first_name, last_name, gender, place_of_birth, dat
     elif frappe.db.exists('ID Type', id_type) is None:
         new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
         new_id.type = id_type
-        new_id.insert()
-        new_id.save()
+        new_id.insert(ignore_permissions=True)
+        new_id.save(ignore_permissions=True)
         get_new_id = frappe.get_last_doc('ID Type')
         ids.id_type = get_new_id.name
         ids.id_docs_pic_name = id_docs_pic_name
@@ -98,8 +98,8 @@ def create_contact_individual(first_name, last_name, gender, place_of_birth, dat
     link.link_doctype = 'Customer'
     link.link_name = link_name
 
-    contact.insert()
-    contact.save()
+    contact.insert(ignore_permissions=True)
+    contact.save(ignore_permissions=True)
 
 def create_contact_company(first_name, last_name, gender, place_of_birth, date_of_birth, link_name, id_type, id_expiry, id_docs_pic_name, phone_number, company_name, nationality):
     contact = frappe.new_doc('Contact')
@@ -110,8 +110,8 @@ def create_contact_company(first_name, last_name, gender, place_of_birth, date_o
     elif frappe.db.exists('Nationality', nationality) is None:
         new_nationality = frappe.new_doc('Nationality')
         new_nationality.nationality = nationality
-        new_nationality.insert()
-        new_nationality.save()
+        new_nationality.insert(ignore_permissions=True)
+        new_nationality.save(ignore_permissions=True)
         customer = frappe.get_last_doc('Nationality')
         contact.nationality = customer.nationality
 
@@ -132,8 +132,8 @@ def create_contact_company(first_name, last_name, gender, place_of_birth, date_o
     elif frappe.db.exists('ID Type', id_type) is None:
         new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
         new_id.type = id_type
-        new_id.insert()
-        new_id.save()
+        new_id.insert(ignore_permissions=True)
+        new_id.save(ignore_permissions=True)
         get_new_id = frappe.get_last_doc('ID Type')
         ids.id_type = get_new_id.name
         ids.id_docs_pic_name = id_docs_pic_name
@@ -147,8 +147,8 @@ def create_contact_company(first_name, last_name, gender, place_of_birth, date_o
     link.link_doctype = 'Customer'
     link.link_name = link_name
 
-    contact.insert()
-    contact.save()
+    contact.insert(ignore_permissions=True)
+    contact.save(ignore_permissions=True)
 
 
 
@@ -167,8 +167,8 @@ def create_address_primary(house_no, street_or_brgy, city, state, country, link_
     link.link_doctype = 'Customer'
     link.link_name = link_name
 
-    address.insert()
-    address.save()
+    address.insert(ignore_permissions=True)
+    address.save(ignore_permissions=True)
 
 def create_address_present(street_or_brgy, city, state, country, link_name, house_no=None):
     address = frappe.new_doc('Address')
@@ -187,5 +187,5 @@ def create_address_present(street_or_brgy, city, state, country, link_name, hous
     link.link_doctype = 'Customer'
     link.link_name = link_name
 
-    address.insert()
-    address.save()
+    address.insert(ignore_permissions=True)
+    address.save(ignore_permissions=True)
