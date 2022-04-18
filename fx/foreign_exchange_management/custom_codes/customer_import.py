@@ -8,11 +8,14 @@ def get_customer(tracking_number, first_name, last_name, risk_level, gender, pla
         create_address_primary(house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, customer.name)
         if street_or_brgy_present != "":
             create_address_present(street_or_brgy_present, city_present, state_present, country_present, customer.name, house_no_present)
+            return " Import Success"
+        return "Import Success"
     else: # if transaction is corporate
         create_customer_company(tracking_number, corporate_account_name, risk_level, nature_of_bussiness)
         customer = frappe.get_last_doc('Customer')
         create_contact_company(first_name, last_name, gender, place_of_birth, date_of_birth, customer.name, id_type, id_expiry, id_docs_pic_name, phone_number, corporate_account_name, nationality)
         create_address_primary(house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, customer.name)
+        return "Import Success"
 
 def create_customer_individual(tracking_number, first_name, last_name, risk_level, gender):
     customer = frappe.new_doc('Customer')
@@ -139,6 +142,7 @@ def create_contact_company(first_name, last_name, gender, place_of_birth, date_o
         ids.id_docs_pic_name = id_docs_pic_name
         if id_expiry is not "0000-00-00":
             ids.expiry_date = id_expiry
+
 
     contact_numbers = contact.append('phone_nos', {})
     contact_numbers.phone = phone_number
