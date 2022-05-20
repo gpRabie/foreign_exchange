@@ -1,6 +1,6 @@
 import frappe
 @frappe.whitelist()
-def get_customer(tracking_number, first_name, last_name, risk_level, gender, place_of_birth, date_of_birth, id_type, id_expiry, id_docs_pic_name, phone_number, nationality, house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, date_registered, house_no_present=None, street_or_brgy_present=None, city_present=None, state_present=None, country_present=None, corporate_account_name = None, nature_of_bussiness = None):
+def get_customer(tracking_number, first_name, last_name, risk_level, gender, place_of_birth, date_of_birth, id_type, id_expiry, id_docs_pic_name, phone_number, nationality, house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, date_registered=None, house_no_present=None, street_or_brgy_present=None, city_present=None, state_present=None, country_present=None, corporate_account_name = None, nature_of_bussiness = None):
     if corporate_account_name == "" and nature_of_bussiness == "": # if transaction is personal
         customer_name = create_customer_individual(tracking_number, first_name, last_name, risk_level, gender)
         customer = frappe.get_doc('Customer', str(customer_name))
