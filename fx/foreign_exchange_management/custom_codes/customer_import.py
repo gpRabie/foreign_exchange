@@ -10,7 +10,8 @@ def get_customer(tracking_number, first_name, last_name, risk_level, gender, pla
         address = frappe.get_doc('Address', str(address_name))
         customer.customer_primary_contact = contact.name
         customer.customer_primary_address = address.name
-        customer.date_registered = date_registered
+        if date_registered != None:
+            customer.date_registered = date_registered
         customer.save(ignore_permissions=True)
         if street_or_brgy_present != "":
             create_address_present(street_or_brgy_present, city_present, state_present, country_present, customer.name, house_no_present)
@@ -25,7 +26,8 @@ def get_customer(tracking_number, first_name, last_name, risk_level, gender, pla
         address = frappe.get_doc('Address', str(address_name))
         customer.customer_primary_contact = contact.name
         customer.customer_primary_address = address.name
-        customer.date_registered = date_registered
+        if date_registered != None:
+            customer.date_registered = date_registered
         customer.save(ignore_permissions=True)
         return "Import Success"
 
