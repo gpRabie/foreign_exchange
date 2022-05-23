@@ -24,5 +24,21 @@ frappe.ui.form.on("Journal Entry", {
                 }
             })
         })
+
+        frm.set_query('reference_doctype', () => {
+			return {
+				"filters": {
+					"name":
+					[
+						'in',
+						[
+							"Pawn Ticket Jewelry",
+							"Pawn Ticket Non Jewelry",
+                            "Provisional Receipt"
+						]
+					]
+				}
+			}
+		})
     }
 })
