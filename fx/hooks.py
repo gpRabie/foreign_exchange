@@ -134,7 +134,7 @@ scheduler_events = {
 			"fx.foreign_exchange_management.custom_codes.journal_entry_import.create_new_journal_entry"
 		],
 
-		"0 15 * * *":[
+		"20 10 * * *":[
 			"pawnshop_management.pawnshop_management.pawnshop_management.custom_codes.update_pawn_ticket.change_pawn_ticket_nj_status_to_expire"
 		]
 	}

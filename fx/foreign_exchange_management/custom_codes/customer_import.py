@@ -1,10 +1,10 @@
 import frappe
 @frappe.whitelist()
-def get_customer(tracking_number, first_name, last_name, risk_level, gender, place_of_birth, date_of_birth, id_type, phone_number, nationality, house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, date_registered=None, house_no_present=None, street_or_brgy_present=None, city_present=None, state_present=None, country_present=None, corporate_account_name = None, nature_of_bussiness = None):
+def get_customer(tracking_number, first_name, last_name, risk_level, gender, place_of_birth, date_of_birth, phone_number, nationality, house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, date_registered=None, house_no_present=None, street_or_brgy_present=None, city_present=None, state_present=None, country_present=None, corporate_account_name = None, nature_of_bussiness = None):
     if corporate_account_name == "" and nature_of_bussiness == "": # if transaction is personal
         customer_name = create_customer_individual(tracking_number, first_name, last_name, risk_level, gender)
         customer = frappe.get_doc('Customer', str(customer_name))
-        contact_name = create_contact_individual(first_name, last_name, gender, place_of_birth, date_of_birth, customer.name, id_type, phone_number, nationality)
+        contact_name = create_contact_individual(first_name, last_name, gender, place_of_birth, date_of_birth, customer.name, phone_number, nationality)
         address_name = create_address_primary(house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, customer.name)
         contact = frappe.get_doc('Contact', str(contact_name))
         address = frappe.get_doc('Address', str(address_name))
@@ -20,7 +20,7 @@ def get_customer(tracking_number, first_name, last_name, risk_level, gender, pla
     else: # if transaction is corporate
         customer_name = create_customer_company(tracking_number, corporate_account_name, risk_level, nature_of_bussiness)
         customer = frappe.get_doc('Customer', str(customer_name))
-        contact_name = create_contact_company(first_name, last_name, gender, place_of_birth, date_of_birth, customer.name, id_type, phone_number, corporate_account_name, nationality)
+        contact_name = create_contact_company(first_name, last_name, gender, place_of_birth, date_of_birth, customer.name, phone_number, corporate_account_name, nationality)
         address_name = create_address_primary(house_no_primary, street_or_brgy_primary, city_primary, state_primary, country_primary, customer.name)
         contact = frappe.get_doc('Contact', str(contact_name))
         address = frappe.get_doc('Address', str(address_name))
@@ -71,7 +71,7 @@ def create_customer_company(tracking_number, corporate_account_name, risk_level,
 
 
 
-def create_contact_individual(first_name, last_name, gender, place_of_birth, date_of_birth, link_name, id_type, phone_number, nationality):
+def create_contact_individual(first_name, last_name, gender, place_of_birth, date_of_birth, link_name, phone_number, nationality):
     contact = frappe.new_doc('Contact')
     contact.first_name = first_name
     contact.last_name = last_name
@@ -94,23 +94,23 @@ def create_contact_individual(first_name, last_name, gender, place_of_birth, dat
     contact.date_of_birth = date_of_birth
 
     # index 0 = id name, index 1 = id picture name & index 2 = expiry date
-    for i in range(len(id_type)):
-        ids = contact.append('id_type', {})
-        if frappe.db.exists('ID Type', id_type[i][0]) == id_type[i][0]: 
-            ids.id_type = id_type[i][0]
-            ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry[i][2] is not "0000-00-00":
-                ids.expiry_date = id_type[i][2]
-        elif frappe.db.exists('ID Type', id_type[i][0]) is None:
-            new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
-            new_id.type = id_type[i][0]
-            new_id.insert(ignore_permissions=True)
-            new_id.save(ignore_permissions=True)
-            get_new_id = frappe.get_last_doc('ID Type')
-            ids.id_type = get_new_id.name
-            ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry[i][2] is not "0000-00-00":
-                ids.expiry_date = id_type[i][2]
+    # for i in range(len(id_type)):
+    #     ids = contact.append('id_type', {})
+    #     if frappe.db.exists('ID Type', id_type[i][0]) == id_type[i][0]: 
+    #         ids.id_type = id_type[i][0]
+    #         ids.id_docs_pic_name = id_type[i][1]
+    #         if id_expiry[i][2] is not "0000-00-00":
+    #             ids.expiry_date = id_type[i][2]
+    #     elif frappe.db.exists('ID Type', id_type[i][0]) is None:
+    #         new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
+    #         new_id.type = id_type[i][0]
+    #         new_id.insert(ignore_permissions=True)
+    #         new_id.save(ignore_permissions=True)
+    #         get_new_id = frappe.get_last_doc('ID Type')
+    #         ids.id_type = get_new_id.name
+    #         ids.id_docs_pic_name = id_type[i][1]
+    #         if id_expiry[i][2] is not "0000-00-00":
+    #             ids.expiry_date = id_type[i][2]
 
     contact_numbers = contact.append('phone_nos', {})
     contact_numbers.phone = phone_number
@@ -124,7 +124,7 @@ def create_contact_individual(first_name, last_name, gender, place_of_birth, dat
     contact.save(ignore_permissions=True)
     return contact.name
 
-def create_contact_company(first_name, last_name, gender, place_of_birth, date_of_birth, link_name, id_type, phone_number, company_name, nationality):
+def create_contact_company(first_name, last_name, gender, place_of_birth, date_of_birth, link_name, phone_number, company_name, nationality):
     contact = frappe.new_doc('Contact')
     contact.first_name = first_name
     contact.last_name = last_name
@@ -146,23 +146,23 @@ def create_contact_company(first_name, last_name, gender, place_of_birth, date_o
     contact.date_of_birth = date_of_birth
     contact.company_name = company_name
 
-    for i in range(len(id_type)):
-        ids = contact.append('id_type', {})
-        if frappe.db.exists('ID Type', id_type[i][0]) == id_type[i][0]: 
-            ids.id_type = id_type[i][0]
-            ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry[i][2] is not "0000-00-00":
-                ids.expiry_date = id_type[i][2]
-        elif frappe.db.exists('ID Type', id_type[i][0]) is None:
-            new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
-            new_id.type = id_type[i][0]
-            new_id.insert(ignore_permissions=True)
-            new_id.save(ignore_permissions=True)
-            get_new_id = frappe.get_last_doc('ID Type')
-            ids.id_type = get_new_id.name
-            ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry[i][2] is not "0000-00-00":
-                ids.expiry_date = id_type[i][2]
+    # for i in range(len(id_type)):
+    #     ids = contact.append('id_type', {})
+    #     if frappe.db.exists('ID Type', id_type[i][0]) == id_type[i][0]: 
+    #         ids.id_type = id_type[i][0]
+    #         ids.id_docs_pic_name = id_type[i][1]
+    #         if id_expiry[i][2] is not "0000-00-00":
+    #             ids.expiry_date = id_type[i][2]
+    #     elif frappe.db.exists('ID Type', id_type[i][0]) is None:
+    #         new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
+    #         new_id.type = id_type[i][0]
+    #         new_id.insert(ignore_permissions=True)
+    #         new_id.save(ignore_permissions=True)
+    #         get_new_id = frappe.get_last_doc('ID Type')
+    #         ids.id_type = get_new_id.name
+    #         ids.id_docs_pic_name = id_type[i][1]
+    #         if id_expiry[i][2] is not "0000-00-00":
+    #             ids.expiry_date = id_type[i][2]
 
 
     contact_numbers = contact.append('phone_nos', {})
