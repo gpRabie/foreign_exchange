@@ -99,7 +99,7 @@ def create_contact_individual(first_name, last_name, gender, place_of_birth, dat
         if frappe.db.exists('ID Type', id_type[i][0]) == id_type[i][0]: 
             ids.id_type = id_type[i][0]
             ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry is not "0000-00-00":
+            if id_expiry[i][2] is not "0000-00-00":
                 ids.expiry_date = id_type[i][2]
         elif frappe.db.exists('ID Type', id_type[i][0]) is None:
             new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
@@ -109,7 +109,7 @@ def create_contact_individual(first_name, last_name, gender, place_of_birth, dat
             get_new_id = frappe.get_last_doc('ID Type')
             ids.id_type = get_new_id.name
             ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry is not "0000-00-00":
+            if id_expiry[i][2] is not "0000-00-00":
                 ids.expiry_date = id_type[i][2]
 
     contact_numbers = contact.append('phone_nos', {})
@@ -151,7 +151,7 @@ def create_contact_company(first_name, last_name, gender, place_of_birth, date_o
         if frappe.db.exists('ID Type', id_type[i][0]) == id_type[i][0]: 
             ids.id_type = id_type[i][0]
             ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry is not "0000-00-00":
+            if id_expiry[i][2] is not "0000-00-00":
                 ids.expiry_date = id_type[i][2]
         elif frappe.db.exists('ID Type', id_type[i][0]) is None:
             new_id = frappe.new_doc('ID Type')      #Creates new ID Type if ID not in document
@@ -161,7 +161,7 @@ def create_contact_company(first_name, last_name, gender, place_of_birth, date_o
             get_new_id = frappe.get_last_doc('ID Type')
             ids.id_type = get_new_id.name
             ids.id_docs_pic_name = id_type[i][1]
-            if id_expiry is not "0000-00-00":
+            if id_expiry[i][2] is not "0000-00-00":
                 ids.expiry_date = id_type[i][2]
 
 
