@@ -34,7 +34,8 @@ frappe.ui.form.on("Journal Entry", {
 						[
 							"Pawn Ticket Jewelry",
 							"Pawn Ticket Non Jewelry",
-                            "Provisional Receipt"
+                            "Provisional Receipt",
+                            "Cash Position Report"
 						]
 					]
 				}

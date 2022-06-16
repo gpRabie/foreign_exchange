@@ -63,11 +63,11 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
         row_values1 = doc1.append('accounts', {})
         row_values1.account = coh_account
         row_values1.credit_in_account_currency = flt(0)
-        row_values1.debit_in_account_currency = flt(additional_funds)
+        row_values1.debit_in_account_currency = abs(flt(additional_funds))
 
         row_values2 = doc1.append('accounts', {})
         row_values2.account = civ_account
-        row_values2.credit_in_account_currency = flt(additional_funds)
+        row_values2.credit_in_account_currency = abs(flt(additional_funds))
         row_values2.debit_in_account_currency = flt(0)
 
         doc1.save(ignore_permissions=True)
@@ -82,13 +82,13 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
 
         row_values1 = doc2.append('accounts', {})
         row_values1.account = shortage_account
-        row_values1.credit_in_account_currency = flt(shortage_overage)
+        row_values1.credit_in_account_currency = abs(flt(shortage_overage))
         row_values1.debit_in_account_currency = flt(0)
 
         row_values2 = doc2.append('accounts', {})
         row_values2.account = coh_account
         row_values2.credit_in_account_currency = flt(0)
-        row_values2.debit_in_account_currency = flt(shortage_overage)
+        row_values2.debit_in_account_currency = abs(flt(shortage_overage))
 
         doc2.save(ignore_permissions=True)
         doc2.submit()
@@ -103,11 +103,11 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
         row_values1 = doc3.append('accounts', {})
         row_values1.account = shortage_account
         row_values1.credit_in_account_currency = flt(0)
-        row_values1.debit_in_account_currency = flt(shortage_overage)
+        row_values1.debit_in_account_currency = abs(flt(shortage_overage))
 
         row_values2 = doc3.append('accounts', {})
         row_values2.account = coh_account
-        row_values2.credit_in_account_currency = flt(shortage_overage)
+        row_values2.credit_in_account_currency = abs(flt(shortage_overage))
         row_values2.debit_in_account_currency = flt(0)
 
         doc3.save(ignore_permissions=True)
@@ -122,13 +122,13 @@ def create_JE(posting_date, coh_account, civ_account, shortage_account, currenci
         
         row_values1 = doc4.append('accounts', {})
         row_values1.account = coh_account
-        row_values1.credit_in_account_currency = flt(peso_out)
+        row_values1.credit_in_account_currency = abs(flt(peso_out))
         row_values1.debit_in_account_currency = flt(0)
 
         row_values2 = doc4.append('accounts', {})
         row_values2.account = currencies_bought_account
         row_values2.credit_in_account_currency = flt(0)
-        row_values2.debit_in_account_currency = flt(peso_out)
+        row_values2.debit_in_account_currency = abs(flt(peso_out))
         
         doc4.save(ignore_permissions=True)
         doc4.submit()
